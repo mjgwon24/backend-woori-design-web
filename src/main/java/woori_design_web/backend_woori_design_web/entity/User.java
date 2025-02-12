@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Builder
+@Builder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -24,8 +24,10 @@ public class User {
     @Column(name = "user_id")
     private Long id;
 
-    private String name;
+    @Column(unique = true)
+    private String loginId;
     private String password;
+    private String name;
 
     @Column(unique = true)
     private String email;
