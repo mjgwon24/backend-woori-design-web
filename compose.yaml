@@ -7,7 +7,6 @@ services:
       - --range_optimizer_max_mem_size=16777216
     environment:
       MYSQL_DATABASE: woori_design_web
-      MYSQL_USER: root
       MYSQL_ROOT_PASSWORD: root
       TZ: Asia/Seoul
     ports:
