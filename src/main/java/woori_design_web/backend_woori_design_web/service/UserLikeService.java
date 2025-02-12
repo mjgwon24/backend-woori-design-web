@@ -11,5 +11,6 @@ public interface UserLikeService {
     void removeLike(Long userId, Long postId);
 
     // 특정 컴포넌트의 좋아요 조회
-    List<UserLike> getLikesByPostId(Long postId);
+    Long getLikeCountByPostId(Long postId);
+
 }
