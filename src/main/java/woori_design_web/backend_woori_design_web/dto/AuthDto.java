@@ -27,6 +27,6 @@ public class AuthDto {
     public static class AuthResponseDto {
         private String accessToken;
         private String refreshToken;
-        private LocalDateTime expiresAt;
+        private LocalDateTime expiration;
     }
 }
