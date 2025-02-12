@@ -9,7 +9,6 @@ import woori_design_web.backend_woori_design_web.repository.CommentRepository;
 import woori_design_web.backend_woori_design_web.service.CommentService;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -17,14 +16,13 @@ import java.time.format.DateTimeFormatter;
 public class CommentServiceImpl implements CommentService {
 
     private final CommentRepository commentRepository;
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     /**
      * 댓글 등록 */
     @Override
     @Transactional
     public Long registerComment(Comment comment) {
-        String now = LocalDateTime.now().format(formatter);
+        LocalDateTime now = LocalDateTime.now();
         Comment newComment = Comment.builder()
                 .user(comment.getUser())
                 .postId(comment.getPostId())

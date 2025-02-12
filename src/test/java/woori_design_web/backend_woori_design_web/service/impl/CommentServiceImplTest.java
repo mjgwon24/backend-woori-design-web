@@ -13,6 +13,7 @@ import woori_design_web.backend_woori_design_web.entity.Comment;
 import woori_design_web.backend_woori_design_web.entity.User;
 import woori_design_web.backend_woori_design_web.repository.CommentRepository;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -58,8 +59,8 @@ class CommentServiceImplTest {
                 .user(alice)
                 .postId(1L)
                 .content("First comment")
-                .createdAt("2025-02-12 10:00:00")
-                .updatedAt("2025-02-12 10:00:00")
+                .createdAt(LocalDateTime.of(2025, 2, 12, 10, 0))
+                .updatedAt(LocalDateTime.of(2025, 2, 12, 10, 0))
                 .build();
 
         when(commentRepository.save(any(Comment.class))).thenReturn(savedComment);
