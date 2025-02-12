@@ -1,5 +1,6 @@
 package woori_design_web.backend_woori_design_web.service.impl;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -65,14 +66,22 @@ public class UserLikeServiceImpl implements UserLikeService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<UserLike> getLikesByPostId(Long postId) {
-        try {
-            List<UserLike> likes = userLikeRepository.findByPostId(postId);
-            log.info("좋아요 조회 성공 - postId: {}, 좋아요 개수: {}", postId, likes.size());
-            return likes;
-        } catch (Exception e) {
-            log.error("좋아요 조회 실패 - postId: {}", postId, e);
-            throw new RuntimeException("좋아요 조회 중 오류 발생");
+    public Long getLikeCountByPostId(Long postId) {
+        if (!userLikeRepository.existsByPostId(postId)) {
+            log.error("좋아요 개수 조회 실패 - UserLike 테이블에 존재하지 않는 postId: {}", postId);
+            throw new EntityNotFoundException("해당 postId에 대한 좋아요 기록이 없습니다.");
         }
+
+        Long likeCount = userLikeRepository.countLikesByPostId(postId);
+
+        if (likeCount == null) {
+            log.warn("좋아요 개수 조회 결과가 null - postId: {}", postId);
+            return 0L;
+        }
+
+        log.info("좋아요 개수 조회 성공 - postId: {}, 좋아요 개수: {}", postId, likeCount);
+        return likeCount;
     }
+
+
 }
