@@ -57,8 +57,6 @@ public class UserServiceImpl implements UserService {
                 .name(request.getName())
                 .email(request.getEmail())
                 .status(UserStatus.ACTIVE)
-                .createdAt(LocalDateTime.now())
-                .updatedAt(LocalDateTime.now())
                 .build();
 
         User saveUser = userRepository.save(user);
@@ -132,7 +130,6 @@ public class UserServiceImpl implements UserService {
 
         User deletedUser = user.toBuilder()
                         .status(UserStatus.DELETED)
-                        .updatedAt(LocalDateTime.now())
                         .build();
 
         userRepository.save(deletedUser);
